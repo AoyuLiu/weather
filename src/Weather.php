@@ -1,8 +1,8 @@
 <?php
-namespace Overtrue\Weather;
+namespace Hola\Weather;
 
-use Overtrue\Weather\Exceptions\HttpException;
-use Overtrue\Weather\Exceptions\InvalidArgumentException;
+use Hola\Weather\Exceptions\HttpException;
+use Hola\Weather\Exceptions\InvalidArgumentException;
 use GuzzleHttp\Client;
 
 

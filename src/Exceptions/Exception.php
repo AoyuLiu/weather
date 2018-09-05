@@ -1,5 +1,5 @@
 <?php
-namespace Overtrue\Weather\Exceptions;
+namespace Hola\Weather\Exceptions;
 
 class Exception extends \Exception
 {

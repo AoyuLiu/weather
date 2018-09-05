@@ -1,5 +1,5 @@
 {
-    "name": "overtrue\/weather",
+    "name": "hola\/weather",
     "description": "a practice",
     "license": "MIT",
     "authors": [
@@ -15,14 +15,14 @@
     },
     "autoload": {
         "psr-4": {
-            "Overtrue\\Weather\\": "./src/"
+            "Hola\\Weather\\": "./src/"
         }
     },
 
     "extra":  {
         "laravel": {
         "providers": [
-            "Overtrue\\Weather\\ServiceProvider"
+            "Hola\\Weather\\ServiceProvider"
             ]
         }
     }
