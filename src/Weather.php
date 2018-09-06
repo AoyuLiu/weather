@@ -1,22 +1,32 @@
 <?php
+
+/*
+ * This file is part of the AoyuLiu/weather.
+ *
+ * (c) AoyuLiu <i@AoyuLiu.me>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace Hola\Weather;
 
 use Hola\Weather\Exceptions\HttpException;
 use Hola\Weather\Exceptions\InvalidArgumentException;
 use GuzzleHttp\Client;
 
-
 class Weather
 {
-	protected $key;
-	protected $guzzleOptions = [];
-	
-	public function __construct(string $key)
-	{
-		$this->key = $key;
-	}
+    protected $key;
 
-	 public function getLiveWeather($city, $format = 'json')
+    protected $guzzleOptions = [];
+
+    public function __construct(string $key)
+    {
+        $this->key = $key;
+    }
+
+    public function getLiveWeather($city, $format = 'json')
     {
         return $this->getWeather($city, 'base', $format);
     }
@@ -26,12 +36,11 @@ class Weather
         return $this->getWeather($city, 'all', $format);
     }
 
-	
-	public function getWeather($city, string $type = 'base', string $format = 'json')
-	{
-		$url = 'https://restapi.amap.com/v3/weather/weatherInfo';
+    public function getWeather($city, string $type = 'base', string $format = 'json')
+    {
+        $url = 'https://restapi.amap.com/v3/weather/weatherInfo';
 
-		if (!\in_array(\strtolower($format), ['xml', 'json'])) {
+        if (!\in_array(\strtolower($format), ['xml', 'json'])) {
             throw new InvalidArgumentException('Invalid response format: '.$format);
         }
 
@@ -39,31 +48,31 @@ class Weather
             throw new InvalidArgumentException('Invalid type value(base/all): '.$type);
         }
 
-		$query = array_filter([
-			'key' => $this->key,
-			'city' => $city,
-			'output' => $format,
-			'extensions' => $type,
-		]);
-		try{
-			$response = $this->getHttpClient()->get($url,[
-			'query' => $query,
-			])->getBody()->getContents();
+        $query = array_filter([
+            'key' => $this->key,
+            'city' => $city,
+            'output' => $format,
+            'extensions' => $type,
+        ]);
 
-		    return 'json' === $format ? \json_decode($response, true) : $response;
-		  } catch(\Exception $e){
-		  	throw new HttpException($e->getMessage(),$e->getCode(),$e);
-		  } 
-	}
+        try {
+            $response = $this->getHttpClient()->get($url, [
+            'query' => $query,
+            ])->getBody()->getContents();
 
-	public function getHttpClient()
-	{
-		
-		return new Client($this->guzzleOptions);
-	}
+            return 'json' === $format ? \json_decode($response, true) : $response;
+        } catch (\Exception $e) {
+            throw new HttpException($e->getMessage(), $e->getCode(), $e);
+        }
+    }
 
-	public function setGuzzleOptions(array $options)
-	{
-		$this->guzzleOptions = $options;
-	}
+    public function getHttpClient()
+    {
+        return new Client($this->guzzleOptions);
+    }
+
+    public function setGuzzleOptions(array $options)
+    {
+        $this->guzzleOptions = $options;
+    }
 }
