@@ -1,12 +1,12 @@
 <h1 align="center"> weather </h1>
 
 <p align="center"> a practice.</p>
-
+![StyleCI build status](https://github.styleci.io/repos/147542104/shield) 
 
 ## Installing
 
 ```shell
-$ composer require overtrue/weather -vvv
+$ composer require hola/weather -vvv
 ```
 
 ## Usage
