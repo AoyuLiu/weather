@@ -1,4 +1,14 @@
 <?php
+
+/*
+ * This file is part of the AoyuLiu/weather.
+ *
+ * (c) AoyuLiu <i@AoyuLiu.me>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace Hola\Weather\Tests;
 
 use GuzzleHttp\Client;
@@ -89,7 +99,6 @@ class WeatherTest extends TestCase
         $w->getWeather('深圳');
     }
 
-
     public function testGetLiveWeather()
     {
         // 将 getWeather 接口模拟为返回固定内容，以测试参数传递是否正确
@@ -109,7 +118,6 @@ class WeatherTest extends TestCase
         // 断言正确传参并返回
         $this->assertSame(['success' => true], $w->getForecastsWeather('深圳'));
     }
-
 
     public function testGetHttpClient()
     {
